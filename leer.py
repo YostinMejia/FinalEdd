@@ -66,10 +66,3 @@ class Excel :
 
 
         return lista_adyacencia
-
-
-# d={}
-
-# d["a"] =[]
-
-# print(d)

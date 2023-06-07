@@ -44,7 +44,7 @@ class Graph:
             # Se miran las aristas
             for arista in self.graph[clave]:
                 # Si el valor de la arista el igual al rol que se está buscando
-                if arista.valor == busqueda:
+                if arista.peso == busqueda:
                     # Se suma 1 a las apariciones con el rol buscado
                     apariciones+=1
                     if apariciones>mayor_apariciones:
@@ -60,7 +60,7 @@ class Graph:
         if actor_name in self.graph:
             relaciones=[]
             for arista in self.graph[actor_name]:
-                relaciones.append(f"{arista.valor} {arista.v2}")
+                relaciones.append(f"{arista.peso} {arista.v2}")
             return relaciones
         else:
             return actor_name+" NO está en la lista"
@@ -73,9 +73,9 @@ class Graph:
         if nombre_persona in self.graph:
             roles=[]
             for arista in self.graph[nombre_persona]:
-                if arista.valor not in roles:
-                    roles.append(arista.valor)
-                if arista.valor == "directed_by":
+                if arista.peso not in roles:
+                    roles.append(arista.peso)
+                if arista.peso == "directed_by":
                     return ["película"]
             return  roles
         else: 
@@ -87,25 +87,27 @@ class Graph:
         origin = origin.lower()
         destiny = destiny.lower()
 
-        if origin not in graph or destiny not in graph:
+        if origin not in graph:
+            print(origin,"No está en el grafo") 
+            return None
+        elif destiny not in graph:
+            print(destiny, "No está en el grafo")
             return None
 
         # queue para realizar el BFS
-        queue = []
-        queue.append(origin)  # Tupla con el vértice y el camino hasta él
-        way=[origin]
+        queue = [(origin,[origin])]
+          # Tupla con el vértice y el camino hasta él
         while queue:
-            actual_vertex = queue.pop()
+            actual_vertex,actual_way = queue.pop()
             # Si se encuentra el destiny, se retorna el camino
             if actual_vertex == destiny:
 
-                return way
+                return actual_way
 
             # Explorar los neighbors del vértice actual
             for neighbor in graph[actual_vertex]:
-                if neighbor.v2 not in way:  # Evitar ciclos
-                    queue.append(neighbor.v2)
-                    way.append (neighbor.v2)
+                if neighbor.v2 not in actual_way:  # Evitar ciclos
+                    queue.append((neighbor.v2, actual_way + [neighbor.peso+"-->",neighbor.v2]))
 
         # Si no se encontró un camino, retorna None
         print("No path found between the given vertices.")
@@ -118,12 +120,12 @@ lista_adyacencia =s.Leer('Peliculas.xlsx')
 grafo = Graph()
 
 grafo.graph = lista_adyacencia
-# grafo.print_graph()
+grafo.print_graph()
 print(grafo.most_requested(True))
 print(grafo.most_requested(False))
 print(grafo.all_actor_movies("Mario puzo"))
 
-print(grafo.tipo_persona("The Silence of the Lambs"))
-print(grafo.find_way("George Lucas","brad pitt"))
+print(grafo.tipo_persona("george lucas"))
+print(grafo.find_way("George Lucas","george lucas"))
 
 
