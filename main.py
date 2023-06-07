@@ -30,14 +30,16 @@ def IniciarApp(path):
             v2 = input("V2 Nombre del destino->")
             print(grafo.find_way(v1,v2))
         elif opcion == 4 :
-            actor_director = int(input("Ingrese el número del rol q desea buscar \n1) actor \n2)director"))
+            actor_director = int(input("Ingrese el número del rol q desea buscar \n1) actor \n2)director\n->"))
             print(grafo.most_requested((actor_director==2)))
         elif opcion == 5:
-            nombre = input("Ingrese el nombre de la persona")
+            nombre = input("Ingrese el nombre de la persona->")
             print(grafo.all_person_movies(nombre))
         elif opcion == 6:
             grafo.print_graph()
         else:
             break
+        
+        print(" \n ")
 
 IniciarApp('Peliculas.xlsx')

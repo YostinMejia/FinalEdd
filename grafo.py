@@ -106,14 +106,51 @@ class Graph:
         while queue:
             actual_vertex,actual_way = queue.pop()
             # Si se encuentra el destiny, se retorna el camino
-            if actual_vertex == destiny:
+            if actual_vertex == destiny :
 
                 return actual_way
 
             # Explorar los neighbors del vértice actual
             for neighbor in graph[actual_vertex]:
                 if neighbor.v2 not in actual_way:  # Evitar ciclos
-                    queue.append((neighbor.v2, actual_way + [neighbor.peso+"-->",neighbor.v2]))
+                    if neighbor.v2 == destiny:
+                        actual_way = actual_way + [neighbor.v2]
+                        # queue.append((neig
+                        # 
+                        # 
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        hbor.v2, actual_way + [neighbor.v2]))
+                        return actual_way
+                    queue.append((neighbor.v2, actual_way + [neighbor.v2]))
+
+
+    # Lo que se necista es mirar si hay una relación entre ambos, es decir si actuan en la misma pelicula 
+    # hay que recorrer el origen y mirar las peliculas 
 
         # Si no se encontró un camino, retorna None
         print("No path found between the given vertices.")

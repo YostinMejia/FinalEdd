@@ -63,6 +63,8 @@ class Excel :
                         escritor = list_escritores[j]
                         # Clave nombre del escritor y valor película en la q escribio
                         self.AgregarRol(lista_adyacencia,escritor,titulo,"writes")
+                        self.AgregarRol(lista_adyacencia,titulo,escritor,"writes")
+
 
 
         return lista_adyacencia
